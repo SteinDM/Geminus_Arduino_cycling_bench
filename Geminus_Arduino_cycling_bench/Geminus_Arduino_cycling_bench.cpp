@@ -1,4 +1,4 @@
-#include <plcLib.h>
+#include "plcLib.h"  // "" for local library
 
 /* Programmable Logic Controller Library for the Arduino and Compatibles
    Pulsed Output - Creating a repeating pulse using the timerCycle command
