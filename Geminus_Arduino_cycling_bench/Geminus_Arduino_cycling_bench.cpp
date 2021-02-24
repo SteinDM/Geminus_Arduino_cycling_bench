@@ -16,16 +16,18 @@ unsigned long AUX1 = 0;                 // Pulse high timer variable
 unsigned long AUX2 = 0;                 // Pulse low timer variable
 unsigned long AUX3 = 0;                 // Pulse high timer variable
 Counter ctr(50000, 1);                    // Counts down, starting at 100
+int timerGoingInputPint = 7;				// timer going switch
 
 void setup() {
   setupPLC();                           // Define inputs and outputs
   Serial.begin(9600);      // Open serial connection over USB
   in (0);
   out(Y0);
+  pinMode(timerGoingInputPint,INPUT_PULLUP);
 }
 
 void loop() {
-if (X0){                          // Read Enable input (1 = enable)
+if (digitalRead(timerGoingInputPint)){                          // Read Enable input (1 = enable)
 	  inNot ((ctr.lowerQ()));
 	  inNot(timerCycle(AUX0, 200, AUX1, 300));     // Repeating pulse, low = 0.1 s, high = 0.1 s
 	  out(Y0);                              // Send pulse waveform to Output 0
