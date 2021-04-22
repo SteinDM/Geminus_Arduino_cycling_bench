@@ -16,7 +16,7 @@ unsigned long AUX1 = 0;                 // Pulse high timer variable
 unsigned long AUX2 = 0;                 // Pulse low timer variable
 unsigned long AUX3 = 0;                 // Pulse high timer variable
 Counter ctr(50000, 1);                    // Counts down, starting at 100
-int timerGoingInputPint = 7;				// timer going switch
+int timerGoingInputPint = 13;				// timer going switch
 
 void setup() {
   setupPLC();                           // Define inputs and outputs
@@ -29,7 +29,7 @@ void setup() {
 void loop() {
 if (digitalRead(timerGoingInputPint)){                          // Read Enable input (1 = enable)
 	  inNot ((ctr.lowerQ()));
-	  inNot(timerCycle(AUX0, 200, AUX1, 300));     // Repeating pulse, low = 0.1 s, high = 0.1 s
+	  inNot(timerCycle(AUX0, 300, AUX1, 300));     // Repeating pulse, low = 0.1 s, high = 0.1 s
 	  out(Y0);                              // Send pulse waveform to Output 0
 	  ctr.countDown();                      // Count down
 
